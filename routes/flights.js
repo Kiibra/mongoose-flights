@@ -10,4 +10,10 @@ router.get('/', flightsCtrl.index )
 // GET localhost:3000/flights/new
 router.get('/new', flightsCtrl.new)
 
+// POST /flights
+router.post('/', flightsCtrl.create)
+
+// DELETE localhost:3000/flights/:flightId
+router.delete('/:flightId', flightsCtrl.delete) 
+
 export { router }
