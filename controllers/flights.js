@@ -35,6 +35,19 @@ function index(req, res) {
     res.redirect('/')
   })
 }
+function show (req, res){
+  Flight.findById(req.params.flightId)
+  .then(flight => {
+    res.render('flights/show', {
+      flight: flight,
+      title: 'Flight Detail'
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/')
+  })
+}
 
 function deleteFlight (req, res){
   // find a flight and delete a flight
@@ -54,4 +67,5 @@ export {
   newFlight as new,
   create,
   deleteFlight as delete, 
+  show,
 }
