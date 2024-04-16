@@ -1,5 +1,10 @@
 import { Flight } from "../models/flight.js"
 
+function newFlight(req, res){
+  res.render('flights/new', {
+    title: 'Add Flight'
+  })
+}
 
 function index(req, res) {
 // list all flights with flight's airline, airport, flightNo, and departure date/time
@@ -20,4 +25,5 @@ function index(req, res) {
 
 export {
   index,
+  newFlight as new,
 }
