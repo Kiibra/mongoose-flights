@@ -8,6 +8,9 @@
     <div>Airline: </div>
     <div>
       <%= flight.airline %>
+      <a href="/flights/<%= flight._id %>/edit">
+        <button>Edit Flight</button>
+      </a>
     </div>
     <div>airport: </div>
     <div><%= flight.airport %></div>

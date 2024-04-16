@@ -7,9 +7,9 @@ function newFlight(req, res){
 }
 function create(req, res){
   // redirect to all flights
-  // for (let key in req.body){
-  //   if (req.body [key] === '') delete req.body[key]
-  // }
+  for (let key in req.body){
+    if (req.body [key] === '') delete req.body[key]
+  }
   Flight.create(req.body)
   .then(movie => {
     // redirect somewhere
@@ -61,6 +61,21 @@ function deleteFlight (req, res){
     res.redirect('/')
   })
 }
+function edit(req, res){
+  // find the flight by is flight._id (req.params.flightId)
+  Flight.findById(req.params.flightId)
+  .then(flight => {
+    // render a edit view and 
+    res.render('flights/edit', {
+      flight: flight,
+      title: 'Edit Flight'
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/flights')
+  })
+}
 
 export {
   index,
@@ -68,4 +83,5 @@ export {
   create,
   deleteFlight as delete, 
   show,
+  edit,
 }
