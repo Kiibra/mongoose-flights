@@ -1,56 +1,51 @@
 import mongoose from 'mongoose'
 
-// optional shortcut to the mongoose.Schema class
 const Schema = mongoose.Schema
 
-  const ticketSchema = new Schema({
-    seat: {
-      type: String,
-      match: /[A-F][1-9]\d?/
-    },
-    price: {
-      type: Number,
-      min: 0
-    },
-  }, {
-    timestamps: true
-  })
-
-const flightSchema = new Schema ({
-  airline: {
+const ticketSchema = new Schema({
+  seat: {
     type: String,
-    enum: ['American', 'Southwest', 'United'],
+    match: /[A-F][1-9]\d?/
   },
-  airport: {
-    type: String,
-    enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN' ],
-    default: ['DEN']
-  },
-  flightNo: {
+  price: {
     type: Number,
-    required: true,
-    min: 10,
-    max: 9999
+    min: 0,
   },
-  departs: {
-    type: Date,
-    Default: function() {
-    let newDate = new Date()
-    let ajustedYear = newDate.setFullYear(new Date()).setFullYear(newDate + 1)
-      return ajustedYear
-    },
-  },
-
-  tickets: [ticketSchema],
-
 }, {
   timestamps: true
 })
 
+const flightSchema = new Schema({
+  airline: {
+    type: String,
+    enum: ['American', 'Southwest', 'United'] 
+  },
+  airport: {
+    type: String,
+    airport: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN'],
+    default: 'DEN'
+  },
+  flightNo: {
+    type: Number,
+    min: 10,
+    max: 9999
+  },
+  departs: {
+    type: Date, 
+    default: function() {
+      let newDate = new Date()
+      let adjustedDate = newDate.setFullYear(new Date().getFullYear() + 1)
+      return adjustedDate
+    },
+  }, 
+  tickets: [ticketSchema]
+}, {
+  timestamps: true
+})
 
+const Flight = mongoose.model('Flight', flightSchema)
 
-const Flight = mongoose.model('Flight', flightSchema )
 
 export {
-  Flight
+  Flight,
 }

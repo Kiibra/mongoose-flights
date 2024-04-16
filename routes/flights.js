@@ -20,6 +20,9 @@ router.get('/:flightId/edit', flightsCtrl.edit)
 // POST /flights
 router.post('/', flightsCtrl.create)
 
+// POST localhost:3000/movies/:flightId/flights
+router.post('/:flightId/tickets', flightsCtrl.createTicket)
+
 // DELETE localhost:3000/flights/:flightId
 router.delete('/:flightId', flightsCtrl.delete) 
 
