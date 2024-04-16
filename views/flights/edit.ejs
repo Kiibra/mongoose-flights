@@ -10,7 +10,7 @@
     method="POST"
     >
     <label for="airline-input">Airline:</label>
-    <select name="airlines" id="airlines-select">
+    <select name="airline" id="airline-select">
       <option value="American">American</option>
       <option value="Southwest">Southwest</option>
       <option value="United">United</option>
@@ -26,7 +26,7 @@
     <label for="flightNo-input">FlightNo:</label>
     <input type="text" name="flightNo" id="flightNo-input" value="<%= flight.flightNo %>">
     <label for="departs-input">Departs:</label>
-    <input type="text" name="departs" id="departs-input" value="<%= flight.departs %>" placeholder="dd/mm/yyyy">
+    <input type="datetime-local" name="departs" id="departs-input" value="<%= flight.departs %>">
     <button type="submit">Save Flight</button>
   </form>
 </main>
