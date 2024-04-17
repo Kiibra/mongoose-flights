@@ -49,9 +49,11 @@ body > nav {
   padding: 0 20px 0 30px;
 }
 nav > i {
-  width: 34px;
+  width: 74px;
   object-fit: contain;
   margin-right: auto;
+  font-size: 32px;
+  color: #035d83;
 }
 nav > a {
   margin: 20px;
