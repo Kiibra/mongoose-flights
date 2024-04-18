@@ -10,7 +10,6 @@ router.get('/', flightsCtrl.index )
 // GET localhost:3000/flights/new
 router.get('/new', flightsCtrl.new)
 
-
 // GET localhost:3000/flights/:flightId
 router.get('/:flightId', flightsCtrl.show) 
 
@@ -22,6 +21,8 @@ router.post('/', flightsCtrl.create)
 
 // POST localhost:3000/movies/:flightId/flights
 router.post('/:flightId/tickets', flightsCtrl.createTicket)
+
+router.post('/:flightId/meals', flightsCtrl.addMeal)
 
 // DELETE localhost:3000/flights/:flightId
 router.delete('/:flightId', flightsCtrl.delete) 

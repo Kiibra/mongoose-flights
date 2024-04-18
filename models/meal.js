@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const mealSchema = new Schema({
   name: String,
 }, {
-timestamps: true
+  timestamps: true
 })
 
 const Meal = mongoose.model('Meal', mealSchema)

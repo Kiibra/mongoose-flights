@@ -18,34 +18,34 @@ const ticketSchema = new Schema({
 const flightSchema = new Schema({
   airline: {
     type: String,
-    enum: ['American', 'Southwest', 'United'] 
+    enum: ['American', 'Southwest', 'United']
   },
   airport: {
     type: String,
-    airport: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN'],
+    enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN'],
     default: 'DEN'
   },
   flightNo: {
     type: Number,
     min: 10,
-    max: 9999
+    max: 9999,
   },
   departs: {
-    type: Date, 
+    type: Date,
     default: function() {
       let newDate = new Date()
-      let adjustedDate = newDate.setFullYear(new Date().getFullYear() + 1)
-      return adjustedDate
-    },
-  }, 
+      let defaultDate = newDate.setFullYear(new Date().getFullYear() + 1)
+      return defaultDate
+    }
+  },
   tickets: [ticketSchema],
-  meals:[{type: Schema.Types.ObjectId, ref: 'Meal'}]
+
+  meals: [{type: Schema.Types.ObjectId, ref: 'Meal'}]
 }, {
   timestamps: true
 })
 
 const Flight = mongoose.model('Flight', flightSchema)
-
 
 export {
   Flight,

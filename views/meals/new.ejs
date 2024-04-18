@@ -4,7 +4,7 @@
 
 <main>
 	<h1><%= title %></h1>
-  <p>Please the Meal is not in the dropdown first
+  <p>Please ensure the Meal is not in the dropdown first: 
     <select>
       <% meals.forEach(function(meal) { %>
         <option><%= meal.name %></option>
@@ -12,10 +12,11 @@
     </select>
   </p>
   <form id="add-meal-form" action="/meals" method="POST">
-    <label for="name-input">Name:</label>
+    <label for="name-input">Meal:</label>
     <input type="text" name="name" id="name-input">
     <button type="submit">Add Meal</button>
   </form>
+
 </main>
 
 <%- include('../partials/footer') %>

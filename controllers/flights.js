@@ -1,4 +1,6 @@
 import { Flight } from "../models/flight.js"
+import { Meal } from '../models/meal.js'
+
 
 function newFlight(req, res){
   res.render('flights/new', {
@@ -8,7 +10,7 @@ function newFlight(req, res){
 function create(req, res){
   // redirect to all flights
   for (let key in req.body){
-    if (req.body [key] === '') delete req.body[key]
+    if (req.body[key] === '') delete req.body[key]
   }
   Flight.create(req.body)
   .then(movie => {
@@ -35,12 +37,18 @@ function index(req, res) {
     res.redirect('/')
   })
 }
-function show (req, res){
+function show(req, res) {
   Flight.findById(req.params.flightId)
+  .populate('meals')
   .then(flight => {
-    res.render('flights/show', {
-      flight: flight,
-      title: 'Flight Detail'
+    // find performers not alreadt selected 
+    Meal.find({_id: {$nin: flight.meals}})
+    .then(meals => {
+      res.render('flights/show', {
+        title: 'Flight Detail', 
+        flight: flight,
+        meals: meals,
+      })
     })
   })
   .catch(err => {
@@ -115,6 +123,29 @@ function createTicket (req, res){
   })
 }
 
+function addMeal(req, res) {
+  // find the movie by id
+  Flight.findById(req.params.flightId)
+  .then(flight => {
+    // associate by adding to cast array
+    flight.meals.push(req.body.mealId)
+  // save the parent document
+    flight.save()
+		.then(() => {
+      // redirect to the movie show view
+		res.redirect(`/flights/${flight._id}`)
+		})
+    .catch(err => {
+      console.log(err)
+      res.redirect("/flights")
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect("/flight")
+  })
+}
+
 export {
   index,
   newFlight as new,
@@ -123,5 +154,6 @@ export {
   show,
   edit,
   update,
-  createTicket
+  createTicket,
+  addMeal
 }
